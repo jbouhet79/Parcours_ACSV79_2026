@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACS Vouillé 79 — Juillet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap');
+  :root { --bleu:#21253d; --rouge:#9e278b; --rose:#fa6bc6; --gris:#f4f5f7; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Barlow',sans-serif; background:var(--gris); color:#222; }
+  header { background:var(--bleu); color:white; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; border-bottom:4px solid var(--rose); }
+  header h1 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2.2rem; letter-spacing:1px; }
+  header .subtitle { font-size:0.9rem; opacity:0.75; margin-top:4px; font-weight:300; }
+  header .contact { font-family:'Barlow Condensed',sans-serif; font-size:1rem; text-align:right; opacity:0.85; display:flex; align-items:center; gap:16px; }
+  nav { background:#161a2e; padding:0 40px; display:flex; gap:4px; overflow-x:auto; }
+  nav a { color:rgba(255,255,255,0.7); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-size:1.05rem; font-weight:600; padding:12px 18px; display:block; letter-spacing:0.5px; white-space:nowrap; transition:color 0.2s,background 0.2s; }
+  nav a:hover { color:white; background:rgba(255,255,255,0.08); }
+  nav a.active { color:var(--rose); border-bottom:3px solid var(--rose); }
+  .mois-titre { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2rem; color:var(--bleu); text-transform:uppercase; letter-spacing:3px; padding:28px 40px 8px; border-bottom:2px solid var(--bleu); }
+  .depart { font-size:0.9rem; color:#666; padding:6px 40px 20px; font-style:italic; }
+  .section-date { padding:10px 40px 4px; font-family:'Barlow Condensed',sans-serif; font-size:1.5rem; font-weight:700; color:var(--rouge); text-transform:uppercase; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:12px 40px 24px; }
+  .grid.single { grid-template-columns:1fr; max-width:700px; }
+  .card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); transition:transform 0.2s,box-shadow 0.2s; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.13); }
+  .card-header { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--bleu); color:white; }
+  .liens { display:flex; flex-direction:column; gap:4px; }
+  .liens a.garmin { color:white; text-decoration:underline; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; }
+  .liens span.label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; }
+  .liens a.gpx { color:var(--rose); font-size:0.8rem; text-decoration:none; }
+  .liens a.gpx:hover { text-decoration:underline; }
+  .km-badge { background:var(--rose); color:var(--bleu); font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1rem; padding:3px 12px; border-radius:20px; white-space:nowrap; }
+  .card-img-wrap { cursor:zoom-in; overflow:hidden; height:220px; display:flex; align-items:center; justify-content:center; background:#eef0f3; }
+  .card-img-wrap img { width:100%; height:100%; object-fit:contain; display:block; transition:transform 0.3s; }
+  .card-img-wrap:hover img { transform:scale(1.03); }
+  .hint { font-size:0.75rem; color:#999; text-align:center; padding:6px; background:#fafafa; }
+  .vide { text-align:center; padding:60px 40px; color:#aaa; font-size:1.1rem; font-style:italic; }
+  #lightbox { display:none; position:fixed; inset:0; background:rgba(10,20,40,0.92); z-index:1000; align-items:center; justify-content:center; flex-direction:column; cursor:zoom-out; }
+  #lightbox.active { display:flex; animation:fadeIn 0.2s ease; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  #lightbox img { max-width:98vw; max-height:96vh; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.5); object-fit:contain; cursor:default; }
+  #lightbox-caption { color:white; font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; margin-top:16px; letter-spacing:1px; }
+  #lightbox-close { position:fixed; top:18px; right:24px; color:white; font-size:2.5rem; cursor:pointer; background:none; border:none; }
+  footer { text-align:center; padding:30px; color:#aaa; font-size:0.85rem; margin-top:20px; border-top:1px solid #ddd; }
+  @media(max-width:700px){ .grid{grid-template-columns:1fr;padding:12px 16px 24px} .mois-titre,.depart,.section-date{padding-left:16px;padding-right:16px} header{flex-direction:column;gap:10px;text-align:center} nav{padding:0 8px} }
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <img src="logo.png" alt="Logo ACS Vouillé" style="height:60px;">
+    <div>
+      <h1>ACS Vouillé 79</h1>
+      <div class="subtitle">Calendrier des parcours 2026</div>
+    </div>
+  </div>
+  <div class="contact">
+    <div>Bruno LE MOAL<br><strong>06 49 75 85 02</strong></div>
+    <img src="Maillot_ACSV79.png" alt="Maillot ACS Vouillé" style="height:60px;">
+  </div>
+</header>
+<nav>
+<a href="juillet.html" class="active">Juillet</a>
+<a href="aout.html">Août</a>
+<a href="septembre.html">Septembre</a>
+<a href="octobre.html">Octobre</a>
+<a href="novembre.html">Novembre</a>
+<a href="decembre.html">Décembre</a>
+</nav>
+<div class="mois-titre">🚴 Juillet</div>
+<div class="depart">Départ 8h30</div>
+<div class="section-date">5 Juillet</div>
+<div class="grid ">
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <a class="garmin" href="https://connect.garmin.com/app/course/454516400" target="_blank">Parcours A</a>
+        <a class="gpx" href="gpx/59.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">88 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="5 Juillet — Parcours A (88 Km)">
+      <img src="images/59.png" alt="Parcours A - 5 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours B</span>
+        <a class="gpx" href="gpx/60.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">76 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="5 Juillet — Parcours B (76 Km)">
+      <img src="images/60.png" alt="Parcours B - 5 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+</div>
+<div class="section-date">12 Juillet</div>
+<div class="grid ">
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours A</span>
+        <a class="gpx" href="gpx/61.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">93 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="12 Juillet — Parcours A (93 Km)">
+      <img src="images/61.png" alt="Parcours A - 12 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours B</span>
+        <a class="gpx" href="gpx/62.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">84 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="12 Juillet — Parcours B (84 Km)">
+      <img src="images/62.png" alt="Parcours B - 12 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+</div>
+<div class="section-date">14 Juillet</div>
+<div class="grid single">
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours A &amp; B</span>
+        <a class="gpx" href="gpx/63.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">78 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="14 Juillet — Parcours A &amp; B (78 Km)">
+      <img src="images/63.png" alt="Parcours A &amp; B - 14 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+</div>
+<div class="section-date">19 Juillet</div>
+<div class="grid ">
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours A</span>
+        <a class="gpx" href="gpx/64.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">90 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="19 Juillet — Parcours A (90 Km)">
+      <img src="images/64.png" alt="Parcours A - 19 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours B</span>
+        <a class="gpx" href="gpx/65.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">76 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="19 Juillet — Parcours B (76 Km)">
+      <img src="images/65.png" alt="Parcours B - 19 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+</div>
+<div class="section-date">26 Juillet</div>
+<div class="grid ">
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours A</span>
+        <a class="gpx" href="gpx/66.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">93 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="26 Juillet — Parcours A (93 Km)">
+      <img src="images/66.png" alt="Parcours A - 26 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="liens">
+        <span class="label">Parcours B</span>
+        <a class="gpx" href="gpx/67.gpx" download>&#11015; Télécharger la trace GPX</a>
+      </div>
+      <span class="km-badge">76 Km</span>
+    </div>
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="26 Juillet — Parcours B (76 Km)">
+      <img src="images/67.png" alt="Parcours B - 26 Juillet">
+    </div>
+    <div class="hint">Cliquez sur la carte pour agrandir</div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <div id="lightbox-caption"></div>
+</div>
+<footer>ACS Vouillé 79 — Tous droits réservés</footer>
+<script>
+function openLightbox(wrap) {
+  document.getElementById('lightbox-img').src = wrap.querySelector('img').src;
+  document.getElementById('lightbox-caption').textContent = wrap.getAttribute('data-caption');
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
