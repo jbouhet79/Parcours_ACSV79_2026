@@ -25,15 +25,16 @@
   .card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); transition:transform 0.2s,box-shadow 0.2s; }
   .card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(0,0,0,0.13); }
   .card-header { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--bleu); color:white; }
-  .liens { display:flex; flex-direction:column; gap:4px; }
-  .liens a.garmin { color:white; text-decoration:underline; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; }
-  .liens span.label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; }
-  .liens a.gpx { color:var(--rose); font-size:0.8rem; text-decoration:none; }
-  .liens a.gpx:hover { text-decoration:underline; }
+  .card-header .parcours-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; }
   .km-badge { background:var(--rose); color:var(--bleu); font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1rem; padding:3px 12px; border-radius:20px; white-space:nowrap; }
   .card-img-wrap { cursor:zoom-in; overflow:hidden; height:220px; display:flex; align-items:center; justify-content:center; background:#eef0f3; }
   .card-img-wrap img { width:100%; height:100%; object-fit:contain; display:block; transition:transform 0.3s; }
   .card-img-wrap:hover img { transform:scale(1.03); }
+  .card-footer { display:flex; gap:10px; padding:10px 12px; background:#f0f0f0; }
+  .btn-garmin { flex:1; text-align:center; background:var(--bleu); color:white; padding:8px; border-radius:6px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.95rem; }
+  .btn-garmin:hover { background:var(--rouge); }
+  .btn-gpx { flex:1; text-align:center; background:var(--rose); color:var(--bleu); padding:8px; border-radius:6px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.95rem; }
+  .btn-gpx:hover { opacity:0.85; }
   .hint { font-size:0.75rem; color:#999; text-align:center; padding:6px; background:#fafafa; }
   .vide { text-align:center; padding:60px 40px; color:#aaa; font-size:1.1rem; font-style:italic; }
   #lightbox { display:none; position:fixed; inset:0; background:rgba(10,20,40,0.92); z-index:1000; align-items:center; justify-content:center; flex-direction:column; cursor:zoom-out; }
@@ -43,7 +44,7 @@
   #lightbox-caption { color:white; font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; margin-top:16px; letter-spacing:1px; }
   #lightbox-close { position:fixed; top:18px; right:24px; color:white; font-size:2.5rem; cursor:pointer; background:none; border:none; }
   footer { text-align:center; padding:30px; color:#aaa; font-size:0.85rem; margin-top:20px; border-top:1px solid #ddd; }
-  @media(max-width:700px){ .grid{grid-template-columns:1fr;padding:12px 16px 24px} .mois-titre,.depart,.section-date{padding-left:16px;padding-right:16px} header{flex-direction:column;gap:10px;text-align:center} nav{padding:0 8px} }
+  @media(max-width:700px){ .grid{grid-template-columns:1fr;padding:12px 16px 24px} .mois-titre,.depart,.section-date{padding-left:16px;padding-right:16px} header{flex-direction:column;gap:10px;text-align:center} nav{padding:0 8px} .card-footer{flex-direction:column} }
 </style>
 </head>
 <body>
@@ -74,132 +75,141 @@
 <div class="grid ">
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/454516400" target="_blank">Parcours A</a>
-        <a class="gpx" href="gpx/59.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours A</span>
       <span class="km-badge">88 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="5 Juillet — Parcours A (88 km)">
       <img src="images/59.png" alt="Parcours A - 5 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/454516400" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/59.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/454516719" target="_blank">Parcours B</a>
-        <a class="gpx" href="gpx/60.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours B</span>
       <span class="km-badge">76 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="5 Juillet — Parcours B (76 km)">
       <img src="images/60.PNG" alt="Parcours B - 5 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/454516719" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/60.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
 </div>
 <div class="section-date">12 Juillet</div>
 <div class="grid ">
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/454521978" target="_blank">Parcours A</a>
-        <a class="gpx" href="gpx/61.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours A</span>
       <span class="km-badge">93 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="12 Juillet — Parcours A (93 km)">
       <img src="images/61.PNG" alt="Parcours A - 12 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/454521978" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/61.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/454522170" target="_blank">Parcours B</a>
-        <a class="gpx" href="gpx/62.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours B</span>
       <span class="km-badge">84 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="12 Juillet — Parcours B (84 km)">
       <img src="images/62.PNG" alt="Parcours B - 12 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/454522170" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/62.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
 </div>
 <div class="section-date">14 Juillet</div>
 <div class="grid single">
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/454533545" target="_blank">Parcours A &amp; B</a>
-        <a class="gpx" href="gpx/63.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours A &amp;amp; B</span>
       <span class="km-badge">78 km</span>
     </div>
-    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="14 Juillet — Parcours A &amp; B (78 km)">
-      <img src="images/63.PNG" alt="Parcours A &amp; B - 14 Juillet">
+    <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="14 Juillet — Parcours A &amp;amp; B (78 km)">
+      <img src="images/63.PNG" alt="Parcours A &amp;amp; B - 14 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/454533545" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/63.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
 </div>
 <div class="section-date">19 Juillet</div>
 <div class="grid ">
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/460428766" target="_blank">Parcours A</a>
-        <a class="gpx" href="gpx/64.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours A</span>
       <span class="km-badge">90 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="19 Juillet — Parcours A (90 km)">
       <img src="images/64.PNG" alt="Parcours A - 19 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/460428766" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/64.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/460429285" target="_blank">Parcours B</a>
-        <a class="gpx" href="gpx/65.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours B</span>
       <span class="km-badge">76 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="19 Juillet — Parcours B (76 km)">
       <img src="images/65.PNG" alt="Parcours B - 19 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/460429285" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/65.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
 </div>
 <div class="section-date">26 Juillet</div>
 <div class="grid ">
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/460431208" target="_blank">Parcours A</a>
-        <a class="gpx" href="gpx/66.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours A</span>
       <span class="km-badge">93 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="26 Juillet — Parcours A (93 km)">
       <img src="images/66.PNG" alt="Parcours A - 26 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/460431208" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/66.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
   <div class="card">
     <div class="card-header">
-      <div class="liens">
-        <a class="garmin" href="https://connect.garmin.com/app/course/460431957" target="_blank">Parcours B</a>
-        <a class="gpx" href="gpx/67.gpx" download>&#11015; Télécharger la trace GPX</a>
-      </div>
+      <span class="parcours-label">Parcours B</span>
       <span class="km-badge">76 km</span>
     </div>
     <div class="card-img-wrap" onclick="openLightbox(this)" data-caption="26 Juillet — Parcours B (76 km)">
       <img src="images/67.PNG" alt="Parcours B - 26 Juillet">
     </div>
     <div class="hint">Cliquez sur la carte pour agrandir</div>
+    <div class="card-footer">
+      <a class="btn-garmin" href="https://connect.garmin.com/app/course/460431957" target="_blank">🗺️ Voir sur Garmin</a>
+      <a class="btn-gpx" href="gpx/67.gpx" download>⬇ Trace GPX</a>
+    </div>
   </div>
 </div>
 
